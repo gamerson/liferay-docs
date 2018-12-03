@@ -26,6 +26,23 @@ prompts you to set it so it's available.
 <!-- Above paragraph is explained based on how it was described BEFORE
 development (BLADE-361). Follow up and update as necessary. -Cody -->
 
+<!-- Gradle:
+
+Assuming the `com.liferay.plugin` is applied, this can be done by adding the
+following snippet inside the Gradle project's `build.gradle` file:
+
+    liferay {
+        liferayHome = "../../../../liferay-ce-portal-7.1.1-ga2"
+        deployDir = file("${liferayHome}/deploy")
+    }
+-->
+
+<!-- Maven:
+
+TBD
+
+-->
+
 +$$$
 
 **Note:** The `blade deploy` command requires a Gradle/Maven wrapper to
