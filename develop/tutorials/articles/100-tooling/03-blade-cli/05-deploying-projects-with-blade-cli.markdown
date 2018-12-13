@@ -16,56 +16,42 @@ all projects in a folder by running the `deploy` command from the parent folder
 
 If you're using Liferay Workspace, the `deploy` command copies your project to
 the @product@ `/deploy` folder, which is found by reading the Liferay Home
-folder set in your workspace's `gradle.properties` file (i.e.,
-`liferay.workspace.home.dir`). The `deploy` command works similarly if you're
-working outside of workspace; the Liferay Home folder, in contrast, is set by
-loading the Liferay extension object (Gradle) or the effective POM (Maven) and
-searching for the Liferay Home property stored there. If it's not stored, Blade
-prompts you to set it so it's available.
+folder set in your workspace's `gradle.properties` or `pom.xml` file. The
+`deploy` command works similarly if you're working outside of workspace; the
+Liferay Home folder, in contrast, is set by loading the Liferay extension object
+(Gradle) or the effective POM (Maven) and searching for the Liferay Home
+property stored there. If it's not stored, Blade prompts you to set it so it's
+available.
 
-<!-- Above paragraph is explained based on how it was described BEFORE
-development (BLADE-361). Follow up and update as necessary. -Cody -->
++$$$
 
-<!-- Gradle:
+**Note:**
 
-Assuming the `com.liferay.plugin` is applied, this can be done by adding the
-following snippet inside the Gradle project's `build.gradle` file:
+If you prefer using pure Gradle or Maven to deploy your project, you can do this
+by applying the appropriate plugin and configuring your Liferay Home property.
+Here's how you can do this for Gradle and Maven:
+
+**Gradle:**
+
+First ensure the Liferay Gradle plugin is applied in your `build.gradle` file:
+
+    apply plugin: "com.liferay.plugin"
+
+Then extend the Liferay extension object to set your Liferay Home and `deploy`
+folder:
 
     liferay {
         liferayHome = "../../../../liferay-ce-portal-7.1.1-ga2"
         deployDir = file("${liferayHome}/deploy")
     }
--->
 
-<!-- Maven:
+**Maven:**
 
-TBD
-
--->
-
-+$$$
-
-**Note:** The `blade deploy` command requires a Gradle/Maven wrapper to
-successfully execute. To ensure the availability of a build tool wrapper, work
-in a Liferay Workspace. For more information on Liferay Workspaces, see the
-[Creating a Liferay Workspace with Blade CLI](/develop/tutorials/-/knowledge_base/7-1/creating-a-liferay-workspace-with-blade-cli)
-tutorial.
+Ensure the Bundle Support plugin is applied and configure Liferay Home in your
+`pom.xml`. See the
+[Deploying a Project Built with Maven to Liferay Portal](/tutorials/-/knowledge_base/7-1/deploying-a-project-built-with-maven-to-product)
+for details.
 
 $$$
-
-+$$$
-
-**Note:** If you run into errors during the build/deploy process of your
-project, check to make sure your workspace is accounting for the
-[appropriate certificates](/develop/tutorials/-/knowledge_base/7-1/configuring-a-liferay-workspace#certification-issues-in-liferay-workspace).
-
-$$$
-
-You can also watch the deployed module for changes by specifying the `-w`
-parameter.
-
-    blade deploy -w
-
-This parameter automatically redeploys the module when changes are detected.
 
 Cool! You've successfully deployed your module project using Blade CLI.
